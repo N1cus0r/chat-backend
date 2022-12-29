@@ -56,27 +56,43 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
-
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chat',
-        'USER': 'postgres',
-        'PASSWORD': 'nicu_nicu1',
+        'NAME': 'tets_hgcm',
+        'USER': 'tets_hgcm_user',
+        'PASSWORD': 'voYHM5uFg81jB8sf813sg5kkLnxE1rJL',
+        'HOST': 'dpg-cemqmqcgqg4ekmbln290-a',
+        'PORT': '5432',
     }
 }
+
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'chat',
+#         'USER': 'postgres',
+#         'PASSWORD': 'nicu_nicu1',
+#     }
+# }
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": [("127.0.0.1", 6379)],
+            "hosts": ['redis://red-cemqkvha6gdkdn4nk120:6379'],
         },
     },
 }
 
-# asdasdasdasdasdasd
-# asdjlhasd
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": [("127.0.0.1", 6379)],
+#         },
+#     },
+# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
