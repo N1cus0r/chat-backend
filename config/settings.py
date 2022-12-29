@@ -59,10 +59,10 @@ ASGI_APPLICATION = 'config.asgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'tets_hgcm',
-        'USER': 'tets_hgcm_user',
-        'PASSWORD': 'voYHM5uFg81jB8sf813sg5kkLnxE1rJL',
-        'HOST': 'dpg-cemqmqcgqg4ekmbln290-a',
+        'NAME': 'chat_database',
+        'USER': 'nicusor',
+        'PASSWORD': 'v403yyjt517slh7t9Pfd9ihFtyYxbr8r',
+        'HOST': 'dpg-cemu5vun6mpkfa74p7d0-a',
         'PORT': '5432',
     }
 }
