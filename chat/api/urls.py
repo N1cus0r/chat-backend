@@ -16,4 +16,5 @@ urlpatterns = [
     path('join-room/', views.JoinRoom.as_view()),
     path('leave-room/', views.LeaveRoom.as_view()),
     path('get-messages/', views.GetRoomMessages.as_view()),
+    path('is-room-active/', views.IsRoomActive.as_view()),
 ]

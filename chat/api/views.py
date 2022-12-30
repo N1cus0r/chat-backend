@@ -130,3 +130,14 @@ class GetRoomMessages(APIView):
             serializer = self.serializer_class(messages, many=True)
             return Response(serializer.data)
         return Response({'error': 'Room code was not provided in url'}, status=status.HTTP_404_NOT_FOUND)
+
+
+class IsRoomActive(APIView):
+    def get(self, request):
+        code = request.query_params.get('code')
+        if code is not None:
+            room_query = Room.objects.filter(code=code)
+            if room_query.exists():
+                return Response({}, status=status.HTTP_200_OK)
+            return Response({'error': 'Room not found, invalid room code'}, status=status.HTTP_404_NOT_FOUND)
+        return Response({'error': 'Room code was not provided in url'}, status=status.HTTP_404_NOT_FOUND)
