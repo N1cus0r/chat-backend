@@ -1,5 +1,9 @@
+import os
 from pathlib import Path
 from datetime import timedelta
+from dotenv import load_dotenv
+load_dotenv()
+
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -56,43 +60,47 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'chat_database',
-        'USER': 'nicusor',
-        'PASSWORD': 'v403yyjt517slh7t9Pfd9ihFtyYxbr8r',
-        'HOST': 'dpg-cemu5vun6mpkfa74p7d0-a',
-        'PORT': '5432',
-    }
-}
-
 # DATABASES = {
 #     'default': {
 #         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'chat',
-#         'USER': 'postgres',
-#         'PASSWORD': 'nicu_nicu1',
+#         'NAME': 'chat_database',
+#         'USER': 'nicusor',
+#         'PASSWORD': 'v403yyjt517slh7t9Pfd9ihFtyYxbr8r',
+#         'HOST': 'dpg-cemu5vun6mpkfa74p7d0-a',
+#         'PORT': '5432',
 #     }
+# }
+print(os.getenv('DB_NAME'))
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': os.getenv('DB_NAME'),
+        'USER': os.getenv('DB_USER'),
+        'PASSWORD': os.getenv('DB_PASSWORD'),
+        'HOST': os.getenv('DB_HOST'),
+        'PORT': os.getenv('DB_PORT')
+    }
+}
+
+
+# CHANNEL_LAYERS = {
+#     "default": {
+#         "BACKEND": "channels_redis.core.RedisChannelLayer",
+#         "CONFIG": {
+#             "hosts": ['redis://red-cemqkvha6gdkdn4nk120:6379'],
+#         },
+#     },
 # }
 
 CHANNEL_LAYERS = {
     "default": {
         "BACKEND": "channels_redis.core.RedisChannelLayer",
         "CONFIG": {
-            "hosts": ['redis://red-cemqkvha6gdkdn4nk120:6379'],
+            "hosts": [os.getenv('REDIS_HOST')]
         },
     },
 }
-
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": [("127.0.0.1", 6379)],
-#         },
-#     },
-# }
 
 AUTH_PASSWORD_VALIDATORS = [
     {
