@@ -7,7 +7,7 @@ load_dotenv()
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-$ydoo5$ret@x!qh@x7k89lb0^)q4b^l7w6o!_%1c%@br&k=vas'
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 DEBUG = True
 
@@ -60,17 +60,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 ASGI_APPLICATION = 'config.asgi.application'
 
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'chat_database',
-#         'USER': 'nicusor',
-#         'PASSWORD': 'v403yyjt517slh7t9Pfd9ihFtyYxbr8r',
-#         'HOST': 'dpg-cemu5vun6mpkfa74p7d0-a',
-#         'PORT': '5432',
-#     }
-# }
-print(os.getenv('DB_NAME'))
 
 DATABASES = {
     'default': {
@@ -83,15 +72,6 @@ DATABASES = {
     }
 }
 
-
-# CHANNEL_LAYERS = {
-#     "default": {
-#         "BACKEND": "channels_redis.core.RedisChannelLayer",
-#         "CONFIG": {
-#             "hosts": ['redis://red-cemqkvha6gdkdn4nk120:6379'],
-#         },
-#     },
-# }
 
 CHANNEL_LAYERS = {
     "default": {
