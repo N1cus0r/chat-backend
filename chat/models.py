@@ -7,6 +7,9 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 
+'''
+Generates a 6 chars code in uppercase  
+'''
 def generate_room_code():
     while True:
         code = "".join(random.choices(string.ascii_uppercase, k=6))

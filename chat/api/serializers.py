@@ -5,7 +5,10 @@ from django.contrib.auth.models import User
 from django.contrib.auth.hashers import make_password
 from ..models import Room, Message
 
-
+'''
+Custom Token serializer class that provides 
+user id and username in the token 
+'''
 class MyTokenObtainSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
@@ -16,7 +19,9 @@ class MyTokenObtainSerializer(TokenObtainPairSerializer):
 
         return token
 
-
+'''
+Simple User model serializer
+'''
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
@@ -30,19 +35,25 @@ class UserSerializer(serializers.ModelSerializer):
 
         return user
 
-
+'''
+Simple Room model serializer
+'''
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ("id", "host_id", "code", "max_participants", "participants")
 
-
+'''
+Create Room serializer
+'''
 class CreateRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
         fields = ("max_participants",)
 
-
+'''
+Simple Message model serializer
+'''
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message

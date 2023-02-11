@@ -2,11 +2,9 @@ import jwt
 
 from rest_framework import status
 from rest_framework.views import APIView
-from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework_simplejwt.views import TokenObtainPairView
-from django.contrib.auth.models import User
 
 from config.settings import SECRET_KEY
 from ..models import Room, Message
@@ -19,10 +17,18 @@ from .serializers import (
 )
 
 
+'''
+This view overrides Simple JWT TokenObtainPairView 
+serializer_class attribute to return user id and username
+in the access token
+'''
 class MyTokenObtainPairView(TokenObtainPairView):
     serializer_class = MyTokenObtainSerializer
 
-
+'''
+This view accepts POST requests and cerates
+a User model instance 
+'''
 class CreateUser(APIView):
     serializer_class = UserSerializer
 
@@ -32,7 +38,10 @@ class CreateUser(APIView):
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
         return Response({"error": "Invalid data provided !"})
-
+'''
+This view accepts GET requests of an authenticated user
+and return the data of the Room model with given code
+'''
 
 class GetRoomDetails(APIView):
     serializer_class = RoomSerializer
@@ -55,6 +64,10 @@ class GetRoomDetails(APIView):
             status=status.HTTP_404_NOT_FOUND,
         )
 
+'''
+This view accepts POST requests of an authenticated user
+and creates a Room model instance
+'''
 
 class CreateRoom(APIView):
     serializer_class = CreateRoomSerializer
@@ -82,6 +95,11 @@ class CreateRoom(APIView):
             room.save()
             return Response(RoomSerializer(room).data, status=status.HTTP_201_CREATED)
 
+'''
+This view accepts PUT requests of an authenticated user
+and increments the participants field of a Room instance 
+with the provided code if a room is not full
+'''
 
 class JoinRoom(APIView):
     serializer_class = RoomSerializer
@@ -110,6 +128,12 @@ class JoinRoom(APIView):
             status=status.HTTP_404_NOT_FOUND,
         )
 
+'''
+This view accepts PUT requests of an authenticated user
+and increments the participants field of a Room instance 
+with the given code and destroys the room if the user
+leaving the room is the host
+'''
 
 class LeaveRoom(APIView):
     serializer_class = RoomSerializer
@@ -139,7 +163,11 @@ class LeaveRoom(APIView):
             status=status.HTTP_404_NOT_FOUND,
         )
 
-
+'''
+This view accepts GET requests of an authenticated user
+and return last 10 messages sent in the room with the
+provided id 
+'''
 class GetRoomMessages(APIView):
     serializer_class = MessageSerializer
     permission_classes = (IsAuthenticated,)
@@ -157,7 +185,11 @@ class GetRoomMessages(APIView):
             status=status.HTTP_404_NOT_FOUND,
         )
 
-
+'''
+This view accepts GET requests and return a 200 
+status response if a room with provided code
+exists else a 404 response 
+'''
 class IsRoomActive(APIView):
     def get(self, request):
         code = request.query_params.get("code")
