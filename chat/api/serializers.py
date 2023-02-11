@@ -11,8 +11,8 @@ class MyTokenObtainSerializer(TokenObtainPairSerializer):
     def get_token(cls, user):
         token = super().get_token(user)
 
-        token['user_id'] = user.id
-        token['user_username'] = user.username
+        token["user_id"] = user.id
+        token["user_username"] = user.username
 
         return token
 
@@ -20,12 +20,13 @@ class MyTokenObtainSerializer(TokenObtainPairSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ['username', 'password']
+        fields = ["username", "password"]
 
     def create(self, validated_data):
-
-        user = User.objects.create(username=validated_data['username'],
-                                   password=make_password(validated_data['password']))
+        user = User.objects.create(
+            username=validated_data["username"],
+            password=make_password(validated_data["password"]),
+        )
 
         return user
 
@@ -33,16 +34,16 @@ class UserSerializer(serializers.ModelSerializer):
 class RoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ('id', 'host_id', 'code', 'max_participants', 'participants')
+        fields = ("id", "host_id", "code", "max_participants", "participants")
 
 
 class CreateRoomSerializer(serializers.ModelSerializer):
     class Meta:
         model = Room
-        fields = ('max_participants', )
+        fields = ("max_participants",)
 
 
 class MessageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Message
-        fields = '__all__'
+        fields = "__all__"

@@ -1,9 +1,10 @@
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'config.settings')
+
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "config.settings")
 
 import django
-django.setup()
 
+django.setup()
 
 
 from channels.auth import AuthMiddlewareStack
@@ -13,9 +14,11 @@ from django.core.asgi import get_asgi_application
 import chat.routing
 
 
-application = ProtocolTypeRouter({
-    'http': get_asgi_application(),
-    'websocket': AllowedHostsOriginValidator(
-        AuthMiddlewareStack(URLRouter(chat.routing.websocket_urlpatterns))
-    )
-})
+application = ProtocolTypeRouter(
+    {
+        "http": get_asgi_application(),
+        "websocket": AllowedHostsOriginValidator(
+            AuthMiddlewareStack(URLRouter(chat.routing.websocket_urlpatterns))
+        ),
+    }
+)

@@ -5,20 +5,25 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('chat', '0001_initial'),
+        ("chat", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='room',
-            name='host_id',
+            model_name="room",
+            name="host_id",
             field=models.IntegerField(),
         ),
         migrations.AlterField(
-            model_name='room',
-            name='max_participants',
-            field=models.IntegerField(default=5, validators=[django.core.validators.MinValueValidator(2), django.core.validators.MaxValueValidator(5)]),
+            model_name="room",
+            name="max_participants",
+            field=models.IntegerField(
+                default=5,
+                validators=[
+                    django.core.validators.MinValueValidator(2),
+                    django.core.validators.MaxValueValidator(5),
+                ],
+            ),
         ),
     ]

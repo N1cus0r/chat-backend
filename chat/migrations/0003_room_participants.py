@@ -5,15 +5,16 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('chat', '0002_alter_room_host_id_alter_room_max_participants'),
+        ("chat", "0002_alter_room_host_id_alter_room_max_participants"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='room',
-            name='participants',
-            field=models.IntegerField(default=0, validators=[django.core.validators.MinValueValidator(0)]),
+            model_name="room",
+            name="participants",
+            field=models.IntegerField(
+                default=0, validators=[django.core.validators.MinValueValidator(0)]
+            ),
         ),
     ]
